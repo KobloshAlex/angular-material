@@ -16,6 +16,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HeaderComponent } from "./navigations/header/header.component";
 import { SidenavListComponent } from "./navigations/sidenav-list/sidenav-list.component";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatCardModule } from "@angular/material/card";
+import {MatSelectModule} from '@angular/material/select';
+import {MatOptionModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import { SidenavListComponent } from "./navigations/sidenav-list/sidenav-list.co
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTabsModule,
+    MatCardModule,
+    MatSelectModule,
+    MatOptionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
