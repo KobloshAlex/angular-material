@@ -15,7 +15,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatCheckboxModule,
+    MatSidenavModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

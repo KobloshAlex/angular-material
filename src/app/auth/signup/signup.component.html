@@ -1,5 +1,11 @@
 <section class="signup-form">
-  <form fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="center center" #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <form
+    fxLayoutGap="10px"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    #form="ngForm"
+    (ngSubmit)="onSubmit(form)"
+  >
     <mat-form-field>
       <input
         ngModel
@@ -44,6 +50,8 @@
     <mat-checkbox ngModel required name="agree" color="primary" labelPosition="after"
       >Agree to Terms & Conditions.</mat-checkbox
     >
-    <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary">Submit</button>
+    <button [disabled]="form.invalid" type="submit" mat-raised-button color="primary">
+      Submit
+    </button>
   </form>
 </section>
