@@ -16,9 +16,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HeaderComponent } from "./navigations/header/header.component";
 import { SidenavListComponent } from "./navigations/sidenav-list/sidenav-list.component";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { StopTrainingDialogComponent } from "./training/current-training/stop-training-dialog/stop-training-dialog.component";
-import { MatDialogModule } from "@angular/material/dialog";
+import { AuthService } from "./auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -42,10 +41,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule,
-    MatDialogModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
