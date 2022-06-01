@@ -16,10 +16,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HeaderComponent } from "./navigations/header/header.component";
 import { SidenavListComponent } from "./navigations/sidenav-list/sidenav-list.component";
-import { MatTabsModule } from "@angular/material/tabs";
-import { MatCardModule } from "@angular/material/card";
-import {MatSelectModule} from '@angular/material/select';
-import {MatOptionModule} from '@angular/material/core';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { StopTrainingDialogComponent } from "./training/current-training/stop-training-dialog/stop-training-dialog.component";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -33,6 +32,7 @@ import {MatOptionModule} from '@angular/material/core';
     WelcomeComponent,
     HeaderComponent,
     SidenavListComponent,
+    StopTrainingDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,10 +42,8 @@ import {MatOptionModule} from '@angular/material/core';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTabsModule,
-    MatCardModule,
-    MatSelectModule,
-    MatOptionModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
