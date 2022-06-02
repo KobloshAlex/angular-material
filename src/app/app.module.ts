@@ -19,6 +19,9 @@ import { SidenavListComponent } from "./navigations/sidenav-list/sidenav-list.co
 import { StopTrainingDialogComponent } from "./training/current-training/stop-training-dialog/stop-training-dialog.component";
 import { AuthService } from "./auth/auth.service";
 import { TrainingService } from "./training/training.service";
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { TrainingService } from "./training/training.service";
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [AuthService, TrainingService],
   bootstrap: [AppComponent],

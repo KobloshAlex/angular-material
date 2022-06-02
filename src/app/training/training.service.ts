@@ -8,7 +8,7 @@ export class TrainingService {
     { id: "legs", name: "Legs training", duration: 30, calories: 1823 },
     { id: "hands", name: "Hands training", duration: 120, calories: 1123 },
     { id: "chest", name: "Chest training", duration: 88, calories: 1423 },
-    { id: "back", name: "Back training", duration: 10, calories: 1123 },
+    { id: "back", name: "Back training", duration: 3, calories: 1123 },
   ];
 
   private runningExercise: Exercise;
@@ -43,5 +43,9 @@ export class TrainingService {
     });
     this.runningExercise = null;
     this.exerciseChanged.next(null);
+  }
+
+  getCompletedOrCanceledExercises() {
+    return this.exercises.slice();
   }
 }
