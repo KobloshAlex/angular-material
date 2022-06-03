@@ -1,5 +1,5 @@
 <section>
-  <form (ngSubmit)="onSubmit()" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="center center" [formGroup]="loginForm">
+  <form class="login-form" (ngSubmit)="onSubmit()" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="center center" [formGroup]="loginForm">
     <mat-form-field>
       <input formControlName="email" type="email" matInput placeholder="email" />
       <mat-hint>Please enter email</mat-hint>

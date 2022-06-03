@@ -6,11 +6,11 @@ import { map } from "rxjs/operators";
 
 @Injectable()
 export class TrainingService {
-  private availableExercises: Exercise[] = [];
-  private runningExercise: Exercise;
   exerciseChanged = new Subject<Exercise>();
   exercisesChanged = new Subject<Exercise[]>();
-  private exercises: Exercise[] = [];
+  finishedExercisesChanged = new Subject<any>();
+  private availableExercises: Exercise[] = [];
+  private runningExercise: Exercise;
 
   constructor(private db: AngularFirestore) {}
 
@@ -30,7 +30,7 @@ export class TrainingService {
       )
       .subscribe((exercises: Exercise[]) => {
         this.availableExercises = exercises;
-        this.exercisesChanged.next([...this.availableExercises])
+        this.exercisesChanged.next([...this.availableExercises]);
       });
   }
 
@@ -60,11 +60,16 @@ export class TrainingService {
     this.exerciseChanged.next(null);
   }
 
-  getCompletedOrCanceledExercises() {
-    return this.exercises.slice();
+  fetchCompletedOrCanceledExercises() {
+    this.db
+      .collection("finishedExercises")
+      .valueChanges()
+      .subscribe((exercises) => {
+        this.finishedExercisesChanged.next(exercises)
+      });
   }
 
   private addDataToDatabase(exercise: Exercise) {
-    this.db.collection("finishedExercises").add(exercise)
+    this.db.collection("finishedExercises").add(exercise);
   }
 }
