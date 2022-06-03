@@ -5,19 +5,14 @@
       <mat-card-content fxLayoutAlign="center">
         <mat-form-field>
           <mat-select placeholder="pick a training" required ngModel name="exercise">
-            <mat-option *ngFor="let training of trainings" [value]="training.id">
+            <mat-option *ngFor="let training of exercises" [value]="training.id">
               {{ training.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions fxLayoutAlign="center">
-        <button
-          [disabled]="f.invalid"
-          type="submit"
-          mat-raised-button
-          color="primary"
-        >
+        <button [disabled]="f.invalid" type="submit" mat-raised-button color="primary">
           Start
         </button>
       </mat-card-actions>

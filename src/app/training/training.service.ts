@@ -1,22 +1,37 @@
 import { Exercise } from "./exercise.model";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class TrainingService {
-  private availableExercises: Exercise[] = [
-    { id: "legs", name: "Legs training", duration: 30, calories: 1823 },
-    { id: "hands", name: "Hands training", duration: 120, calories: 1123 },
-    { id: "chest", name: "Chest training", duration: 88, calories: 1423 },
-    { id: "back", name: "Back training", duration: 3, calories: 1123 },
-  ];
-
+  private availableExercises: Exercise[] = [];
   private runningExercise: Exercise;
   exerciseChanged = new Subject<Exercise>();
+  exercisesChanged = new Subject<Exercise[]>();
   private exercises: Exercise[] = [];
 
-  getExercises() {
-    return this.availableExercises.slice();
+  constructor(private db: AngularFirestore) {}
+
+  fetchExercises(): void {
+    this.db
+      .collection("availableExercises")
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((action) => {
+            const data = action.payload.doc.data() as Exercise;
+            data.id = action.payload.doc.id;
+
+            return data;
+          });
+        })
+      )
+      .subscribe((exercises: Exercise[]) => {
+        this.availableExercises = exercises;
+        this.exercisesChanged.next([...this.availableExercises])
+      });
   }
 
   startExercise(exerciseId: string) {
@@ -29,12 +44,12 @@ export class TrainingService {
   }
 
   completeExercise() {
-    this.exercises.push({ ...this.runningExercise, date: new Date(), state: "completed" });
+    this.addDataToDatabase({ ...this.runningExercise, date: new Date(), state: "completed" });
     this.runningExercise = null;
     this.exerciseChanged.next(null);
   }
   cancelExercise(progress: number) {
-    this.exercises.push({
+    this.addDataToDatabase({
       ...this.runningExercise,
       date: new Date(),
       state: "cancelled",
@@ -47,5 +62,9 @@ export class TrainingService {
 
   getCompletedOrCanceledExercises() {
     return this.exercises.slice();
+  }
+
+  private addDataToDatabase(exercise: Exercise) {
+    this.db.collection("finishedExercises").add(exercise)
   }
 }
