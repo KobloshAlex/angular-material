@@ -1,16 +1,22 @@
-import { User } from "./user.model";
 import { AuthData } from "./auth-data.model";
 import { Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { UiService } from "../shared/ui.service";
 
 @Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
   private isAuthenticated: boolean;
 
-  constructor(private router: Router, private afa: AngularFireAuth) {}
+  constructor(
+    private router: Router,
+    private afa: AngularFireAuth,
+    private snackBar: MatSnackBar,
+    private uiService: UiService
+  ) {}
 
   initAuthListener() {
     this.afa.authState.subscribe((user) => {
@@ -27,19 +33,31 @@ export class AuthService {
   }
 
   registerUser(authData: AuthData) {
+    this.uiService.loadingStateChanged.next(true);
     const { password, email } = authData;
     this.afa
       .createUserWithEmailAndPassword(email, password)
-      .then((result) => {})
-      .catch(console.error);
+      .then((result) => {
+        this.uiService.loadingStateChanged.next(false);
+      })
+      .catch((error) => {
+        this.uiService.loadingStateChanged.next(false);
+        this.snackBar.open(error.message, null, { duration: 3000 });
+      });
   }
 
   login(authData: AuthData) {
+    this.uiService.loadingStateChanged.next(true);
     const { password, email } = authData;
     this.afa
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {})
-      .catch(console.error);
+      .then((result) => {
+        this.uiService.loadingStateChanged.next(false);
+      })
+      .catch((error) => {
+        this.uiService.loadingStateChanged.next(false);
+        this.snackBar.open(error.message, null, { duration: 3000 });
+      });
   }
 
   logout() {

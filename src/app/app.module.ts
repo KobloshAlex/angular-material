@@ -19,13 +19,11 @@ import { SidenavListComponent } from "./navigations/sidenav-list/sidenav-list.co
 import { StopTrainingDialogComponent } from "./training/current-training/stop-training-dialog/stop-training-dialog.component";
 import { AuthService } from "./auth/auth.service";
 import { TrainingService } from "./training/training.service";
-import { MatTableModule } from "@angular/material/table";
-import { MatSortModule } from "@angular/material/sort";
-import { MatPaginatorModule } from "@angular/material/paginator";
 import { AngularFireModule } from "@angular/fire";
 import { environment } from "../environments/environment";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
-import {AngularFireAuthModule} from '@angular/fire/auth';
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { UiService } from "./shared/ui.service";
 
 @NgModule({
   declarations: [
@@ -49,14 +47,11 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
-  providers: [AuthService, TrainingService],
+  providers: [AuthService, TrainingService, UiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
